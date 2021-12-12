@@ -35,10 +35,13 @@ class AppListProvider: ListProvider {
         let systemApplicationDir = NSSearchPathForDirectoriesInDomains(
             .applicationDirectory, .systemDomainMask, true)[0]
 
-        // appName to dir recursivity key/valye dict
+        let homeDir = FileManager.default.homeDirectoryForCurrentUser.path
+
+        // appName to dir recursivity key/value dict
         appDirDict[applicationDir] = true
         appDirDict[systemApplicationDir] = true
         appDirDict["/System/Library/CoreServices/"] = false
+        appDirDict["\(homeDir)/Applications"] = true
 
         initFileWatch(Array(appDirDict.keys))
         updateAppList()
