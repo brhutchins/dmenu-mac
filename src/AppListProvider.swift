@@ -75,7 +75,7 @@ class AppListProvider: ListProvider {
             for sub in subs {
                 let dir = appDir.appendingPathComponent(sub)
 
-                if dir.pathExtension == "app" {
+                if dir.pathExtension == "app" && dir.lastPathComponent.prefix(1) != "." {
                     list.append(dir)
                 } else if dir.hasDirectoryPath && recursive {
                     list.append(contentsOf: self.getAppList(dir))
